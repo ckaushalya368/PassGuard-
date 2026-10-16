@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../utils/password_checker.dart';
 
+import '../widgest/strength_indicator.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -34,6 +36,39 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                if (passwordStrength.isNotEmpty &&
+                    passwordStrength != "Please enter a password") ...[
+                  const SizedBox(height: 20),
+
+                  const Text(
+                    "Security Recommendations",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  ...getPasswordSuggestions(passwordController.text).map(
+                    (suggestion) => Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+
+                      child: Text(
+                        "• $suggestion",
+                        style: const TextStyle(
+                          fontSize: 15,
+                          color: Colors.orangeAccent,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+
+                if (passwordStrength == "Weak" ||
+                    passwordStrength == "Medium" ||
+                    passwordStrength == "Strong") ...[
+                  const SizedBox(height: 20),
+
+                  StrengthIndicator(strength: passwordStrength),
+                ],
                 // App Icon
                 const Icon(
                   Icons.security,
@@ -144,6 +179,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           : passwordStrength == "Medium"
                           ? Colors.orange
                           : Colors.red,
+
+                          
                     ),
                   ),
               ],
