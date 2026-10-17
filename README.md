@@ -141,7 +141,9 @@ Do not enter real passwords when testing the application.
 
 ##  Live Demo
 
-Coming soon – Firebase Hosting deployment.
+🔗 [Try PassGuard](https://passguard-ee1d2.web.app/)
+
+Deployed using Firebase Hosting.
 
 ##  Future Improvements
 
